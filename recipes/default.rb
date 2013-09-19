@@ -18,6 +18,13 @@
 # limitations under the License.
 #
 
+class ::Chef::Recipe
+  include ::Chef::Apt::Helpers
+end
+
+# On systems where apt is not installed, this recipe does not execute
+return unless apt_installed?
+
 # Run apt-get update to create the stamp file
 execute "apt-get-update" do
   command "apt-get update"
